@@ -80,16 +80,16 @@ public class ArrayList<T> {
             capacity = this.backingArray.length;
         }
 
-        /* if the value at index is null and array size does not exceed array capacity
+        /* if the value at index is null and array size does not exceed or array size = array capacity
         *  then the value at index = data
         *  since the case where non-consecutive has throw exception
         *  this is a quick way to add data to the back of the array
         *  this should resolve in O(1)
         */
-        if (this.size < capacity && this.backingArray[index] == null) {
+        if (this.size <= capacity && this.backingArray[index] == null) {
             this.backingArray[index] = data;
-        } else if (this.size >= capacity) {
-            /* if array size exceed or equal to array capacity
+        } else if (this.size > capacity) {
+            /* if array size exceed to array capacity
              * then create a new array with double the capacity
              * this should resolve in O(n)
              * n: the # of index in the array
@@ -122,7 +122,6 @@ public class ArrayList<T> {
                     temp[tempIndex] = data;
                     tempIndex++;
                 }
-
             }
             this.backingArray = temp;
         } else {
